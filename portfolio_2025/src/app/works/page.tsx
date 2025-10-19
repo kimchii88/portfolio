@@ -11,7 +11,8 @@ import SpinningModel from "@/components/SpinningModel";
 import RightLinedSection from "@/components/layouts/RightLinedSection";
 import Image from "next/image";
 import ClickableSectionText from "@/components/ClickableSectionText";
-import { redirect } from "next/navigation";
+import Navbar from "@/components/Navbar";
+
 export default function Works() {
     const [fallingTransition, setFallingTransition] = useState(false);
 
@@ -34,6 +35,7 @@ export default function Works() {
         <div>
             <main className="w-screen h-screen pt-20 pb-20 bg-[#faf1d9]">
                 {fallingTransition ? <ScreenFadeOut isActive /> : <ScreenFadeIn isActive />}
+                <Navbar />
                 <div id="title-cards" className="flex flex-row gap-5 px-10">
                     <div className="bg-[#f5a651] h-[500px] w-1/2 rounded-2xl flex justify-center items-center object-center flex-col">
                         <h1 className="text-[#d14538] text-9xl font-coiny text-center">WORK</h1>

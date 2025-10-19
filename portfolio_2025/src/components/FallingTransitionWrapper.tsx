@@ -33,7 +33,6 @@ export default function FallingTransitionWrapper({
 
     useEffect(() => {
         if (trigger && !falling) {
-            console.log("true");
             setFalling(true);
             setTimeout(() => {
                 onComplete?.();

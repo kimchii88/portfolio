@@ -8,7 +8,7 @@ import { PresentationControls } from "@react-three/drei";
 
 interface SpinningModelProps {
     url: string;
-    onClickEvent: () => void;
+    onClickEvent?: () => void;
 }
 
 export default function SpinningModel({ url, onClickEvent }: SpinningModelProps) {
@@ -42,7 +42,7 @@ export default function SpinningModel({ url, onClickEvent }: SpinningModelProps)
                 scale={new THREE.Vector3(0.009, 0.009, 0.009)}
                 onPointerOver={() => setHovered(true)}
                 onPointerOut={() => setHovered(false)}
-                onClick={() => onClickEvent()}
+                onClick={() => onClickEvent && onClickEvent()}
                 rotation={[0, -90, 0]}
             />
         </PresentationControls>
