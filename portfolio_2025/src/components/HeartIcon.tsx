@@ -1,7 +1,7 @@
 "use client";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
 interface HeartIconProps {
@@ -14,11 +14,16 @@ export default function HeartIcon({ url, triggerFallTransition }: HeartIconProps
     const ref = useRef<THREE.Group>(null);
     const [hovered, setHovered] = useState(false);
 
-    // hover and rotation effect
+    useEffect(() => {
+        document.body.style.cursor = hovered ? "pointer" : "auto";
+        return () => {
+            document.body.style.cursor = "auto";
+        };
+    }, [hovered]);
+
     useFrame((state) => {
         if (ref.current) {
             if (hovered) {
-                // ref.current.rotation.y += 0.01;
                 const t = state.clock.getElapsedTime();
                 ref.current.rotation.x += Math.sin(t * 3) * 0.03;
                 ref.current.rotation.y += Math.sin(t * 3) * 0.03;
@@ -33,11 +38,11 @@ export default function HeartIcon({ url, triggerFallTransition }: HeartIconProps
         <primitive
             ref={ref}
             object={gltf.scene}
-            scale={new THREE.Vector3(0.01, 0.01, 0.01)}
+            scale={0.004}
             onPointerOver={() => setHovered(true)}
             onPointerOut={() => setHovered(false)}
             rotation={[0, 45.6, 0]}
-            onClick={triggerFallTransition}
+            onClick={() => triggerFallTransition()}
         />
     );
 }

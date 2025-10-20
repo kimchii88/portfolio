@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import ScreenFadeOut from "@/components/SceneFadeOut";
-import ScreenFadeIn from "@/components/SceneFadeIn";
 import { motion } from "framer-motion";
 import LeftLinedSection from "@/components/layouts/LeftLinedSection";
 import { Canvas } from "@react-three/fiber";
@@ -12,9 +11,12 @@ import RightLinedSection from "@/components/layouts/RightLinedSection";
 import Image from "next/image";
 import ClickableSectionText from "@/components/ClickableSectionText";
 import Navbar from "@/components/Navbar";
+import LoadingScreen from "@/components/LoadingScreen";
 
 export default function Works() {
-    const [fallingTransition, setFallingTransition] = useState(false);
+    const [pageLoading, setPageLoading] = useState(true);
+
+    const [fallingTransition] = useState(false);
 
     const repeatBannerText = Array.from({ length: 10 }).map((_, index) => {
         return (
@@ -33,8 +35,9 @@ export default function Works() {
 
     return (
         <div>
+            {pageLoading && <LoadingScreen />}
             <main className="w-screen h-screen pt-20 pb-20 bg-[#faf1d9]">
-                {fallingTransition ? <ScreenFadeOut isActive /> : <ScreenFadeIn isActive />}
+                {fallingTransition && <ScreenFadeOut isActive />}
                 <Navbar />
                 <div id="title-cards" className="flex flex-row gap-5 px-10">
                     <div className="bg-[#f5a651] h-[500px] w-1/2 rounded-2xl flex justify-center items-center object-center flex-col">
@@ -53,6 +56,9 @@ export default function Works() {
                                     <SpinningModel
                                         url="/models/longTable/25_10_17_21_42_00_099.gltf"
                                         onClickEvent={() => scrollToSection("technologyone")}
+                                        isLoading={() => {
+                                            setPageLoading(false);
+                                        }}
                                     />
                                     <ClickableSectionText
                                         section="TechnologyOne"
@@ -169,181 +175,180 @@ export default function Works() {
                         {repeatBannerText}
                     </motion.div>
                 </div>
-
-                <LeftLinedSection
-                    image={{
-                        imageUrl: "/svgs/technologyone.svg",
-                        imageAlt: "technologyOne receipt",
-                        imageWidth: 650,
-                        imageHeight: 850,
-                    }}
-                >
-                    <div className="relative w-full flex justify-center items-center py-8" id="technologyone">
-                        <Image
-                            className="w-auto h-auto"
-                            src={"/images/vogue.jpg"}
-                            alt={"Vogue photo"}
-                            width={500}
-                            height={500}
-                        />
-                        <a
-                            href="https://www.technology1.co.uk/products/dxp-student"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="absolute top-24 right-14 w-[250px] h-[250px]"
+                {!pageLoading && (
+                    <>
+                        <LeftLinedSection
+                            image={{
+                                imageUrl: "/svgs/technologyone.svg",
+                                imageAlt: "technologyOne receipt",
+                                imageWidth: 650,
+                                imageHeight: 850,
+                            }}
                         >
-                            <Image
-                                className="w-full h-full animate-spin [animation-duration:10s]
+                            <div className="relative w-full flex justify-center items-center py-8" id="technologyone">
+                                <Image
+                                    className="w-auto h-auto"
+                                    src={"/images/vogue.jpg"}
+                                    alt={"Vogue photo"}
+                                    width={500}
+                                    height={500}
+                                />
+                                <a
+                                    href="https://www.technology1.co.uk/products/dxp-student"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="absolute top-24 right-14 w-[250px] h-[250px]"
+                                >
+                                    <Image
+                                        className="w-full h-full animate-spin [animation-duration:10s]
 "
-                                src={"/svgs/flower.svg"}
-                                alt={"flower svg"}
-                                width={100}
-                                height={100}
-                            />
-                            <div className="absolute inset-0 flex items-center justify-center text-white font-semibold text-sm text-center pointer-events-none">
-                                <span className="w-1/2">
-                                    Check out the product I helped build at TechnologyOne! <br />
-                                    [Click me]
-                                </span>
+                                        src={"/svgs/flower.svg"}
+                                        alt={"flower svg"}
+                                        width={100}
+                                        height={100}
+                                    />
+                                    <div className="absolute inset-0 flex items-center justify-center text-white font-semibold text-sm text-center pointer-events-none">
+                                        <span className="w-1/2">
+                                            Check out the product I helped build at TechnologyOne! <br />
+                                            [Click me]
+                                        </span>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                </LeftLinedSection>
-                <RightLinedSection
-                    image={{
-                        imageUrl: "/svgs/zeroflucs.svg",
-                        imageAlt: "zeroflucs receipt",
-                        imageWidth: 650,
-                        imageHeight: 850,
-                    }}
-                >
-                    <div className="relative w-full flex justify-center items-center py-8" id="zeroflucs">
-                        <iframe
-                            width="800"
-                            height="450"
-                            src="https://embed.figma.com/proto/pobzBQL70I1q32giB84zU6/Dashboard-Mockup?node-id=252-7121&p=f&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A2&show-proto-sidebar=1&embed-host=share"
-                        ></iframe>
-                    </div>
-                </RightLinedSection>
-                <LeftLinedSection
-                    image={{
-                        imageUrl: "/svgs/shecodes.svg",
-                        imageAlt: "shecodes receipt",
-                        imageWidth: 650,
-                        imageHeight: 850,
-                    }}
-                >
-                    <div className="relative w-full flex justify-center items-center py-8" id="shecodes">
-                        <Image
-                            className="w-auto h-auto"
-                            src={"/images/shecodes.jpg"}
-                            alt={"shecodes photo"}
-                            width={500}
-                            height={500}
-                        />
-                    </div>
-                </LeftLinedSection>
-                <RightLinedSection
-                    image={{
-                        imageUrl: "/svgs/elipse.svg",
-                        imageAlt: "elipse receipt",
-                        imageWidth: 650,
-                        imageHeight: 850,
-                    }}
-                >
-                    <div className="relative w-full flex justify-center items-center py-8" id="elipse">
-                        <a
-                            href="https://www.elipse.uq.edu.au/projects"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="absolute top-10 right-0 w-[800px] h-[800px]"
+                        </LeftLinedSection>
+                        <RightLinedSection
+                            image={{
+                                imageUrl: "/svgs/zeroflucs.svg",
+                                imageAlt: "zeroflucs receipt",
+                                imageWidth: 650,
+                                imageHeight: 850,
+                            }}
                         >
-                            <Image
-                                className="w-full h-full animate-spin [animation-duration:10s]
-"
-                                src={"/svgs/cloudbob.svg"}
-                                alt={"cloudbob svg"}
-                                width={100}
-                                height={100}
-                            />
-                            <div className="absolute inset-0 flex items-center justify-center font-anton text-white font-semibold text-2xl text-center pointer-events-none">
-                                <span className="w-1/2">[Click me to see projects I&apos;ve worked on]</span>
+                            <div className="relative w-full flex justify-center items-center py-8" id="zeroflucs">
+                                <iframe
+                                    width="800"
+                                    height="450"
+                                    src="https://embed.figma.com/proto/pobzBQL70I1q32giB84zU6/Dashboard-Mockup?node-id=252-7121&p=f&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A2&show-proto-sidebar=1&embed-host=share"
+                                ></iframe>
                             </div>
-                        </a>
-                    </div>
-                </RightLinedSection>
-                <LeftLinedSection
-                    image={{
-                        imageUrl: "/svgs/aurora.svg",
-                        imageAlt: "aurora receipt",
-                        imageWidth: 650,
-                        imageHeight: 850,
-                    }}
-                >
-                    <div className="relative w-full flex justify-center items-center py-8" id="aurora">
-                        <iframe
-                            width="800"
-                            height="450"
-                            src="https://embed.figma.com/proto/7uP7biZwk0poxVuhJENsb6/AuroraFoods?node-id=1-3&p=f&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3&embed-host=share"
-                        ></iframe>
-                    </div>
-                </LeftLinedSection>
-                <RightLinedSection
-                    image={{
-                        imageUrl: "/svgs/ventures.svg",
-                        imageAlt: "ventures receipt",
-                        imageWidth: 650,
-                        imageHeight: 850,
-                    }}
-                >
-                    <div className="relative w-full flex justify-center items-center py-8" id="ventures">
-                        <Image
-                            className="w-auto h-auto"
-                            src={"/images/ventures.jpeg"}
-                            alt={"ventures photo"}
-                            width={500}
-                            height={500}
-                        />
-                    </div>
-                </RightLinedSection>
-                <LeftLinedSection
-                    image={{
-                        imageUrl: "/svgs/swyftx.svg",
-                        imageAlt: "swyftx receipt",
-                        imageWidth: 650,
-                        imageHeight: 850,
-                    }}
-                >
-                    <div className="relative w-full flex justify-center items-center py-8" id="swyftx">
-                        <iframe
-                            width="800"
-                            height="450"
-                            src="https://embed.figma.com/proto/HbrE98nfodTDlXyvL5ZBmh/DreamX?node-id=92-455&p=f&scaling=min-zoom&content-scaling=fixed&page-id=45%3A2&starting-point-node-id=92%3A455&embed-host=share"
-                        ></iframe>
-                    </div>
-                </LeftLinedSection>
-                <RightLinedSection
-                    image={{
-                        imageUrl: "/svgs/lit.svg",
-                        imageAlt: "lit receipt",
-                        imageWidth: 650,
-                        imageHeight: 850,
-                    }}
-                >
-                    <div className="relative w-full flex justify-center items-center py-8" id="lit">
-                        <Image
-                            className="w-auto h-auto"
-                            src={"/images/lit_instagram.jpg"}
-                            alt={"ladies in tech instagram photo"}
-                            width={500}
-                            height={500}
-                        />
-                    </div>
-                </RightLinedSection>
-                <div id="content-section-right-lined" className="flex flex-row">
-                    <div id="images"></div>
-                    <div id="text-content"></div>
-                </div>
+                        </RightLinedSection>
+                        <LeftLinedSection
+                            image={{
+                                imageUrl: "/svgs/shecodes.svg",
+                                imageAlt: "shecodes receipt",
+                                imageWidth: 650,
+                                imageHeight: 850,
+                            }}
+                        >
+                            <div className="relative w-full flex justify-center items-center py-8" id="shecodes">
+                                <Image
+                                    className="w-auto h-auto"
+                                    src={"/images/shecodes.jpg"}
+                                    alt={"shecodes photo"}
+                                    width={500}
+                                    height={500}
+                                />
+                            </div>
+                        </LeftLinedSection>
+                        <RightLinedSection
+                            image={{
+                                imageUrl: "/svgs/elipse.svg",
+                                imageAlt: "elipse receipt",
+                                imageWidth: 650,
+                                imageHeight: 850,
+                            }}
+                        >
+                            <div className="relative w-full flex justify-center items-center py-8" id="elipse">
+                                <a
+                                    href="https://www.elipse.uq.edu.au/projects"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="absolute top-10 right-0 w-[800px] h-[800px]"
+                                >
+                                    <Image
+                                        className="w-full h-full animate-spin [animation-duration:10s]
+"
+                                        src={"/svgs/cloudbob.svg"}
+                                        alt={"cloudbob svg"}
+                                        width={100}
+                                        height={100}
+                                    />
+                                    <div className="absolute inset-0 flex items-center justify-center font-anton text-white font-semibold text-2xl text-center pointer-events-none">
+                                        <span className="w-1/2">[Click me to see projects I&apos;ve worked on]</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </RightLinedSection>
+                        <LeftLinedSection
+                            image={{
+                                imageUrl: "/svgs/aurora.svg",
+                                imageAlt: "aurora receipt",
+                                imageWidth: 650,
+                                imageHeight: 850,
+                            }}
+                        >
+                            <div className="relative w-full flex justify-center items-center py-8" id="aurora">
+                                <iframe
+                                    width="800"
+                                    height="450"
+                                    src="https://embed.figma.com/proto/7uP7biZwk0poxVuhJENsb6/AuroraFoods?node-id=1-3&p=f&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3&embed-host=share"
+                                ></iframe>
+                            </div>
+                        </LeftLinedSection>
+                        <RightLinedSection
+                            image={{
+                                imageUrl: "/svgs/ventures.svg",
+                                imageAlt: "ventures receipt",
+                                imageWidth: 650,
+                                imageHeight: 850,
+                            }}
+                        >
+                            <div className="relative w-full flex justify-center items-center py-8" id="ventures">
+                                <Image
+                                    className="w-auto h-auto"
+                                    src={"/images/ventures.jpeg"}
+                                    alt={"ventures photo"}
+                                    width={500}
+                                    height={500}
+                                />
+                            </div>
+                        </RightLinedSection>
+                        <LeftLinedSection
+                            image={{
+                                imageUrl: "/svgs/swyftx.svg",
+                                imageAlt: "swyftx receipt",
+                                imageWidth: 650,
+                                imageHeight: 850,
+                            }}
+                        >
+                            <div className="relative w-full flex justify-center items-center py-8" id="swyftx">
+                                <iframe
+                                    width="800"
+                                    height="450"
+                                    src="https://embed.figma.com/proto/HbrE98nfodTDlXyvL5ZBmh/DreamX?node-id=92-455&p=f&scaling=min-zoom&content-scaling=fixed&page-id=45%3A2&starting-point-node-id=92%3A455&embed-host=share"
+                                ></iframe>
+                            </div>
+                        </LeftLinedSection>
+                        <RightLinedSection
+                            image={{
+                                imageUrl: "/svgs/lit.svg",
+                                imageAlt: "lit receipt",
+                                imageWidth: 650,
+                                imageHeight: 850,
+                            }}
+                        >
+                            <div className="relative w-full flex justify-center items-center py-8" id="lit">
+                                <Image
+                                    className="w-auto h-auto"
+                                    src={"/images/lit_instagram.jpg"}
+                                    alt={"ladies in tech instagram photo"}
+                                    width={500}
+                                    height={500}
+                                />
+                            </div>
+                        </RightLinedSection>
+                    </>
+                )}
             </main>
         </div>
     );

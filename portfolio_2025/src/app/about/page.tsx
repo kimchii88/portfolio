@@ -6,12 +6,13 @@ import Navbar from "@/components/Navbar";
 import { motion } from "framer-motion";
 import BobbleItemWrapper from "@/components/BobbleItemWrapper";
 import Link from "next/link";
+import Filmstrip from "@/components/Filmstrip";
 
 export default function About() {
     return (
         <div className="bg-[#F5A651]">
             <main className="w-screen h-screen pt-10 pb-20 ">
-                {<ScreenFadeIn isActive />}
+                <ScreenFadeIn isActive />
                 <Navbar />
 
                 <div className="relative z-0 w-screen h-screen flex overflow-hidden bg-[#F5A651]">
@@ -51,15 +52,9 @@ export default function About() {
                                     <Image src={"/images/picnic/donut.png"} alt={"donut"} width={200} height={200} />
                                 </BobbleItemWrapper>
                             </div>
-                            <div className="absolute top-[55%] left-[15%]">
+                            <div className="absolute bottom-[12%] left-[10%]">
                                 <BobbleItemWrapper>
-                                    <Image
-                                        className="rotate-12"
-                                        src={"/images/picnic/bag.png"}
-                                        alt={"bag"}
-                                        width={200}
-                                        height={200}
-                                    />
+                                    <Filmstrip />
                                 </BobbleItemWrapper>
                             </div>
                         </div>
@@ -104,25 +99,6 @@ export default function About() {
                                 </BobbleItemWrapper>
                             </div>
                         </div>
-
-                        {/* <BobbleItemWrapper>
-                            <Image
-                                className="absolute top-24 left-44 rotate-12"
-                                src={"/images/picnic/donut.png"}
-                                alt={"donut"}
-                                width={300}
-                                height={300}
-                            />
-                        </BobbleItemWrapper>
-                        <BobbleItemWrapper>
-                            <Image
-                                className="absolute top-40 left-44 rotate-12"
-                                src={"/images/picnic/bag.png"}
-                                alt={"bag cup"}
-                                width={300}
-                                height={300}
-                            />
-                        </BobbleItemWrapper> */}
                     </motion.div>
                     <Image
                         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0"
