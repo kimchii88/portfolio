@@ -10,12 +10,12 @@ interface SpinningModelProps {
     onClickEvent?: () => void;
     uniqueKey?: string;
     isLoading?: () => void;
+    customScale?: number;
 }
 
-export default function SpinningModel({ url, onClickEvent, uniqueKey, isLoading }: SpinningModelProps) {
+export default function SpinningModel({ url, onClickEvent, uniqueKey, isLoading, customScale }: SpinningModelProps) {
     const gltf = useGLTF(url);
     const ref = useRef<THREE.Group>(null);
-    console.log("hiii");
 
     useEffect(() => {
         isLoading?.();
@@ -39,7 +39,7 @@ export default function SpinningModel({ url, onClickEvent, uniqueKey, isLoading 
                 key={uniqueKey}
                 object={gltf.scene}
                 ref={ref}
-                scale={new THREE.Vector3(0.009, 0.009, 0.009)}
+                scale={customScale ? customScale : new THREE.Vector3(0.009, 0.009, 0.009)}
                 onClick={() => onClickEvent && onClickEvent()}
                 rotation={[0, -90, 0]}
             />

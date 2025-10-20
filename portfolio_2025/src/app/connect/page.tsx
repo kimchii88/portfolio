@@ -4,6 +4,7 @@ import FileIcon from "@/components/FileIcon";
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import ScreenFadeIn from "@/components/SceneFadeIn";
+import useIsMobile from "@/helpers/useIsMobile";
 import { useWithSound } from "@/helpers/useSounds";
 import Image from "next/image";
 import { useState } from "react";
@@ -13,6 +14,7 @@ export default function Connect() {
     const quackSoundEffect = useWithSound("/audio/quack.mp3");
     const selectedSoundEffect = useWithSound("/audio/selected.mp3");
     const [pageLoading, setPageLoading] = useState(true);
+    const isScreenMobile = useIsMobile();
 
     const onClickPhoneNumber = () => {
         setCopied(true);
@@ -24,13 +26,12 @@ export default function Connect() {
     };
 
     return (
-        <div className="w-screen h-screen bg-[#faf1d9]">
+        <div className="w-screen h-screen bg-[#faf1d9] overflow-x-hidden">
             {pageLoading && <LoadingScreen />}
-
             <ScreenFadeIn isActive />
             <Navbar />
             <main className=" w-full h-full flex justify-center items-center">
-                <div className="grid grid-cols-3 grid-rows-2 self-center w-1/2 h-96 z-1 mt-24 ml-52">
+                <div className="grid md:grid-cols-3 md:grid-rows-2 self-center md:w-1/2 md:h-96 z-1 md:mt-24 md:ml-52 gap-20 mt-[500px] pb-20 ">
                     <FileIcon
                         groupScale={2.5}
                         onClickEvent={() => window.open("https://www.linkedin.com/in/kim-gao-71a295184/", "_blank")}
@@ -53,7 +54,7 @@ export default function Connect() {
                         />
                     </div>
                     <FileIcon
-                        groupScale={2.3}
+                        groupScale={2}
                         onClickEvent={() => (window.location.href = "mailto:kimmygao808@gmail.com")}
                         imageLink={"/models/email/25_10_19_20_35_20_450.gltf"}
                         label={`Email [kimmygao808@gmail.com]`}
@@ -81,13 +82,15 @@ export default function Connect() {
                         }}
                     />
                 </div>
-                <Image
-                    className="absolute w-7/12 h-auto top-32"
-                    src={"/svgs/finder.svg"}
-                    alt={"finder background photo"}
-                    width={150}
-                    height={150}
-                />
+                {!isScreenMobile && (
+                    <Image
+                        className="absolute w-[900px] h-auto top-24"
+                        src={"/svgs/finder.svg"}
+                        alt={"finder background photo"}
+                        width={150}
+                        height={150}
+                    />
+                )}
             </main>
         </div>
     );

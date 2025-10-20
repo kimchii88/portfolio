@@ -11,7 +11,7 @@ export default function Navbar() {
     };
 
     return (
-        <ul className="absolute z-1 top-5 left-1/2 transform -translate-x-1/2 flex flex-row bg-[#faf1d9] border-3 border-[#572b1c] rounded-4xl w-fit px-5 py-2 gap-10 font-roboto text-[#572b1c] font-bold ">
+        <ul className="absolute z-10 top-5 left-1/2 transform -translate-x-1/2 flex flex-row bg-[#faf1d9] border-3 border-[#572b1c] rounded-4xl w-fit px-5 py-2 gap-10 font-roboto text-[#572b1c] font-bold ">
             <Link href={"/"} className={underlineActivePathClass("")}>
                 Home
             </Link>

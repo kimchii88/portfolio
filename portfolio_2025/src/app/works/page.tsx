@@ -12,11 +12,13 @@ import Image from "next/image";
 import ClickableSectionText from "@/components/ClickableSectionText";
 import Navbar from "@/components/Navbar";
 import LoadingScreen from "@/components/LoadingScreen";
+import useIsMobile from "@/helpers/useIsMobile";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 export default function Works() {
     const [pageLoading, setPageLoading] = useState(true);
-
     const [fallingTransition] = useState(false);
+    const isScreenMobile = useIsMobile();
 
     const repeatBannerText = Array.from({ length: 10 }).map((_, index) => {
         return (
@@ -36,106 +38,107 @@ export default function Works() {
     return (
         <div>
             {pageLoading && <LoadingScreen />}
-            <main className="w-screen h-screen pt-20 pb-20 bg-[#faf1d9]">
+            <main className="w-screen h-screen pt-20 pb-20 bg-[#faf1d9] overflow-x-hidden">
                 {fallingTransition && <ScreenFadeOut isActive />}
                 <Navbar />
-                <div id="title-cards" className="flex flex-row gap-5 px-10">
-                    <div className="bg-[#f5a651] h-[500px] w-1/2 rounded-2xl flex justify-center items-center object-center flex-col">
-                        <h1 className="text-[#d14538] text-9xl font-coiny text-center">WORK</h1>
+                <div id="title-cards" className="flex md:flex-row gap-5 md:px-10 px-6 flex-col">
+                    <div className="bg-[#f5a651] h-[500px] md:w-1/2 rounded-2xl flex justify-center items-center object-center flex-col">
+                        <h1 className="text-[#d14538] md:text-9xl text-8xl font-coiny text-center">WORK</h1>
                         <p className="text-[#572c1c]">Some cool things I did in the past</p>
                     </div>
-                    <div className="bg-[#d14538] h-[500px] w-1/2 rounded-2xl flex items-center flex-col px-10">
-                        <h1 className="text-lg pt-10 pl-5 pb-1 self-start text-[#faf1d9] font-roboto">
-                            Table of Contents
+                    <div className="bg-[#d14538] md:h-[500px] h-[300px] md:w-1/2 rounded-2xl flex items-center flex-col px-10">
+                        <h1 className="text-lg pt-5 md:pl-5 pb-1 self-start text-[#faf1d9] font-roboto">
+                            {`${isScreenMobile ? "A Table of Content" : " Table of Contents"}`}
                         </h1>
-                        <div className="bg-[#faf1d9] h-full w-full rounded-2xl mb-10">
+                        <div className="bg-[#faf1d9] h-full w-full rounded-2xl mb-10 overflow-scroll">
                             <Canvas camera={{ position: [0, 0, 8], fov: 35 }}>
                                 <Environment preset="sunset" />
                                 <ambientLight intensity={0.2} />
-                                <group position={[-4, 2, -4]}>
-                                    <SpinningModel
-                                        url="/models/longTable/25_10_17_21_42_00_099.gltf"
-                                        onClickEvent={() => scrollToSection("technologyone")}
-                                        isLoading={() => {
-                                            setPageLoading(false);
-                                        }}
-                                    />
-                                    <ClickableSectionText
-                                        section="TechnologyOne"
-                                        scrollToSection={() => scrollToSection("technologyone")}
-                                    />
-                                </group>
-                                <group position={[0, 2, -4]}>
-                                    <SpinningModel
-                                        url="/models/curveTable/25_10_18_12_11_20_050.gltf"
-                                        onClickEvent={() => scrollToSection("zeroflucs")}
-                                    />
-                                    <ClickableSectionText
-                                        section="ZeroFlucs"
-                                        scrollToSection={() => scrollToSection("zeroflucs")}
-                                    />
-                                </group>
-                                <group position={[4, 2, -4]}>
-                                    <SpinningModel
-                                        url="/models/greenTable/25_10_17_21_39_52_856.gltf"
-                                        onClickEvent={() => scrollToSection("shecodes")}
-                                    />
-                                    <ClickableSectionText
-                                        section="SheCodes"
-                                        scrollToSection={() => scrollToSection("shecodes")}
-                                    />
-                                </group>
-                                <group position={[-4, -0.5, -4]}>
-                                    <SpinningModel
-                                        url="/models/circularTable/25_10_17_21_44_41_772.gltf"
-                                        onClickEvent={() => scrollToSection("elipse")}
-                                    />
-                                    <ClickableSectionText
-                                        section="Elipse"
-                                        scrollToSection={() => scrollToSection("elipse")}
-                                    />
-                                </group>
-                                <group position={[0, -0.5, -4]}>
-                                    <SpinningModel
-                                        url="/models/glassTable/25_10_18_12_13_45_839.gltf"
-                                        onClickEvent={() => scrollToSection("aurora")}
-                                    />
-                                    <ClickableSectionText
-                                        section="Aurora Foods"
-                                        scrollToSection={() => scrollToSection("aurora")}
-                                    />
-                                </group>
-                                <group position={[4, -0.5, -4]}>
-                                    <SpinningModel
-                                        url="/models/mushroomTable/25_10_18_11_55_04_284.gltf"
-                                        onClickEvent={() => scrollToSection("ventures")}
-                                    />
-                                    <ClickableSectionText
-                                        section="Ventures"
-                                        scrollToSection={() => scrollToSection("ventures")}
-                                    />
-                                </group>
-                                <group position={[-4, -2.6, -4]}>
-                                    <SpinningModel
-                                        url="/models/shortTable/25_10_17_21_43_36_878.gltf"
-                                        onClickEvent={() => scrollToSection("swyftx")}
-                                    />
-                                    <ClickableSectionText
-                                        section="Swyftx"
-                                        scrollToSection={() => scrollToSection("swyftx")}
-                                    />
-                                </group>
-                                <group position={[0, -2.6, -4]}>
-                                    <SpinningModel
-                                        url="/models/ovalTable/25_10_18_12_12_27_042.gltf"
-                                        onClickEvent={() => scrollToSection("lit")}
-                                    />
-                                    <ClickableSectionText
-                                        section="Ladies in Technology"
-                                        scrollToSection={() => scrollToSection("lit")}
-                                    />
-                                </group>
-                                <group position={[4, -2.6, -4]}>
+                                {!isScreenMobile && (
+                                    <>
+                                        <group position={[-4, 2, -4]}>
+                                            <SpinningModel
+                                                url="/models/longTable/25_10_17_21_42_00_099.gltf"
+                                                onClickEvent={() => scrollToSection("technologyone")}
+                                            />
+                                            <ClickableSectionText
+                                                section="TechnologyOne"
+                                                scrollToSection={() => scrollToSection("technologyone")}
+                                            />
+                                        </group>
+                                        <group position={[0, 2, -4]}>
+                                            <SpinningModel
+                                                url="/models/curveTable/25_10_18_12_11_20_050.gltf"
+                                                onClickEvent={() => scrollToSection("zeroflucs")}
+                                            />
+                                            <ClickableSectionText
+                                                section="ZeroFlucs"
+                                                scrollToSection={() => scrollToSection("zeroflucs")}
+                                            />
+                                        </group>
+                                        <group position={[4, 2, -4]}>
+                                            <SpinningModel
+                                                url="/models/greenTable/25_10_17_21_39_52_856.gltf"
+                                                onClickEvent={() => scrollToSection("shecodes")}
+                                            />
+                                            <ClickableSectionText
+                                                section="SheCodes"
+                                                scrollToSection={() => scrollToSection("shecodes")}
+                                            />
+                                        </group>
+                                        <group position={[-4, -0.5, -4]}>
+                                            <SpinningModel
+                                                url="/models/circularTable/25_10_17_21_44_41_772.gltf"
+                                                onClickEvent={() => scrollToSection("elipse")}
+                                            />
+                                            <ClickableSectionText
+                                                section="Elipse"
+                                                scrollToSection={() => scrollToSection("elipse")}
+                                            />
+                                        </group>
+                                        <group position={[0, -0.5, -4]}>
+                                            <SpinningModel
+                                                url="/models/glassTable/25_10_18_12_13_45_839.gltf"
+                                                onClickEvent={() => scrollToSection("aurora")}
+                                            />
+                                            <ClickableSectionText
+                                                section="Aurora Foods"
+                                                scrollToSection={() => scrollToSection("aurora")}
+                                            />
+                                        </group>
+                                        <group position={[4, -0.5, -4]}>
+                                            <SpinningModel
+                                                url="/models/mushroomTable/25_10_18_11_55_04_284.gltf"
+                                                onClickEvent={() => scrollToSection("ventures")}
+                                            />
+                                            <ClickableSectionText
+                                                section="Ventures"
+                                                scrollToSection={() => scrollToSection("ventures")}
+                                            />
+                                        </group>
+                                        <group position={[-4, -2.6, -4]}>
+                                            <SpinningModel
+                                                url="/models/shortTable/25_10_17_21_43_36_878.gltf"
+                                                onClickEvent={() => scrollToSection("swyftx")}
+                                            />
+                                            <ClickableSectionText
+                                                section="Swyftx"
+                                                scrollToSection={() => scrollToSection("swyftx")}
+                                            />
+                                        </group>
+                                        <group position={[0, -2.6, -4]}>
+                                            <SpinningModel
+                                                url="/models/ovalTable/25_10_18_12_12_27_042.gltf"
+                                                onClickEvent={() => scrollToSection("lit")}
+                                            />
+                                            <ClickableSectionText
+                                                section="Ladies in Technology"
+                                                scrollToSection={() => scrollToSection("lit")}
+                                            />
+                                        </group>
+                                    </>
+                                )}
+                                <group position={isScreenMobile ? [0, -1.2, 0] : [4, -2.6, -4]}>
                                     <SpinningModel
                                         url="/models/sideTable/25_10_18_12_37_30_381.gltf"
                                         onClickEvent={() =>
@@ -144,6 +147,10 @@ export default function Works() {
                                                 "_blank"
                                             )
                                         }
+                                        customScale={isScreenMobile ? 0.025 : 0.009}
+                                        isLoading={() => {
+                                            setPageLoading(false);
+                                        }}
                                     />
                                     <Text
                                         fontSize={0.3}
@@ -175,7 +182,7 @@ export default function Works() {
                         {repeatBannerText}
                     </motion.div>
                 </div>
-                {!pageLoading && (
+                {!pageLoading && !isScreenMobile && (
                     <>
                         <LeftLinedSection
                             image={{
@@ -348,6 +355,48 @@ export default function Works() {
                             </div>
                         </RightLinedSection>
                     </>
+                )}
+
+                {isScreenMobile && (
+                    <Carousel
+                        className="mx-6"
+                        opts={{
+                            align: "start",
+                            loop: true,
+                        }}
+                    >
+                        <CarouselContent>
+                            <CarouselItem className="basis-[320px]">
+                                <Image
+                                    src={"/svgs/technologyone.svg"}
+                                    alt={"technologyone receipt"}
+                                    width={650}
+                                    height={450}
+                                />
+                            </CarouselItem>
+                            <CarouselItem className="basis-[320px]">
+                                <Image src={"/svgs/zeroflucs.svg"} alt={"zeroflucs receipt"} width={650} height={450} />
+                            </CarouselItem>
+                            <CarouselItem className="basis-[320px]">
+                                <Image src={"/svgs/elipse.svg"} alt={"elipse receipt"} width={650} height={850} />
+                            </CarouselItem>
+                            <CarouselItem className="basis-[320px]">
+                                <Image src={"/svgs/shecodes.svg"} alt={"shecodes receipt"} width={650} height={850} />
+                            </CarouselItem>
+                            <CarouselItem className="basis-[320px]">
+                                <Image src={"/svgs/aurora.svg"} alt={"aurora receipt"} width={650} height={850} />
+                            </CarouselItem>
+                            <CarouselItem className="basis-[320px]">
+                                <Image src={"/svgs/ventures.svg"} alt={"ventures receipt"} width={650} height={850} />
+                            </CarouselItem>
+                            <CarouselItem className="basis-[320px]">
+                                <Image src={"/svgs/swyftx.svg"} alt={"swyftx receipt"} width={650} height={850} />
+                            </CarouselItem>
+                            <CarouselItem className="basis-[320px]">
+                                <Image src={"/svgs/lit.svg"} alt={"lit receipt"} width={650} height={850} />
+                            </CarouselItem>
+                        </CarouselContent>
+                    </Carousel>
                 )}
             </main>
         </div>
