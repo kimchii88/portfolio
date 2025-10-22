@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import ScreenFadeOut from "@/components/SceneFadeOut";
 import { motion } from "framer-motion";
 import LeftLinedSection from "@/components/layouts/LeftLinedSection";
 import { Canvas } from "@react-three/fiber";
-import { Environment, Text } from "@react-three/drei";
+import { Text } from "@react-three/drei";
 import SpinningModel from "@/components/SpinningModel";
 import RightLinedSection from "@/components/layouts/RightLinedSection";
 import Image from "next/image";
@@ -13,20 +13,23 @@ import ClickableSectionText from "@/components/ClickableSectionText";
 import Navbar from "@/components/Navbar";
 import LoadingScreen from "@/components/LoadingScreen";
 import useIsMobile from "@/helpers/useIsMobile";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/Carousel";
+import Lighting from "@/components/ui/Lighting";
 
 export default function Works() {
     const [pageLoading, setPageLoading] = useState(true);
     const [fallingTransition] = useState(false);
     const isScreenMobile = useIsMobile();
 
-    const repeatBannerText = Array.from({ length: 10 }).map((_, index) => {
-        return (
-            <span key={index} className="mx-10 font-anton text-6xl">
-                LOOKING TO HIRE? CALL 07386801051 NOW!!!
-            </span>
-        );
-    });
+    const repeatBannerText = useMemo(() => {
+        return Array.from({ length: 10 }).map((_, index) => {
+            return (
+                <span key={index} className="mx-10 font-anton text-6xl">
+                    LOOKING TO HIRE? CALL 07386801051 NOW!!!
+                </span>
+            );
+        });
+    }, []);
 
     const scrollToSection = (sectionSelected: string) => {
         const el = document.getElementById(sectionSelected);
@@ -38,7 +41,7 @@ export default function Works() {
     return (
         <div>
             {pageLoading && <LoadingScreen />}
-            <main className="w-screen h-screen pt-20 pb-20 bg-[#faf1d9] overflow-x-hidden">
+            <main className="w-screen h-screen pt-20 md:pb-20 bg-[#faf1d9] overflow-x-hidden pb-40">
                 {fallingTransition && <ScreenFadeOut isActive />}
                 <Navbar />
                 <div id="title-cards" className="flex md:flex-row gap-5 md:px-10 px-6 flex-col">
@@ -52,85 +55,102 @@ export default function Works() {
                         </h1>
                         <div className="bg-[#faf1d9] h-full w-full rounded-2xl mb-10 overflow-scroll">
                             <Canvas camera={{ position: [0, 0, 8], fov: 35 }}>
-                                <Environment preset="sunset" />
-                                <ambientLight intensity={0.2} />
+                                <Lighting />
                                 {!isScreenMobile && (
                                     <>
                                         <group position={[-4, 2, -4]}>
-                                            <SpinningModel
-                                                url="/models/longTable/25_10_17_21_42_00_099.gltf"
-                                                onClickEvent={() => scrollToSection("technologyone")}
-                                            />
+                                            <Suspense fallback={null}>
+                                                <SpinningModel
+                                                    url="/models/longTable/longTable_compressed.glb"
+                                                    onClickEvent={() => scrollToSection("technologyone")}
+                                                />
+                                            </Suspense>
                                             <ClickableSectionText
                                                 section="TechnologyOne"
                                                 scrollToSection={() => scrollToSection("technologyone")}
                                             />
                                         </group>
                                         <group position={[0, 2, -4]}>
-                                            <SpinningModel
-                                                url="/models/curveTable/25_10_18_12_11_20_050.gltf"
-                                                onClickEvent={() => scrollToSection("zeroflucs")}
-                                            />
+                                            <Suspense fallback={null}>
+                                                <SpinningModel
+                                                    url="/models/curveTable/curveTable_compressed.glb"
+                                                    onClickEvent={() => scrollToSection("zeroflucs")}
+                                                />
+                                            </Suspense>
                                             <ClickableSectionText
                                                 section="ZeroFlucs"
                                                 scrollToSection={() => scrollToSection("zeroflucs")}
                                             />
                                         </group>
                                         <group position={[4, 2, -4]}>
-                                            <SpinningModel
-                                                url="/models/greenTable/25_10_17_21_39_52_856.gltf"
-                                                onClickEvent={() => scrollToSection("shecodes")}
-                                            />
+                                            <Suspense fallback={null}>
+                                                <SpinningModel
+                                                    url="/models/greenTable/greenTable_compressed.glb"
+                                                    onClickEvent={() => scrollToSection("shecodes")}
+                                                />
+                                            </Suspense>
                                             <ClickableSectionText
                                                 section="SheCodes"
                                                 scrollToSection={() => scrollToSection("shecodes")}
                                             />
                                         </group>
                                         <group position={[-4, -0.5, -4]}>
-                                            <SpinningModel
-                                                url="/models/circularTable/25_10_17_21_44_41_772.gltf"
-                                                onClickEvent={() => scrollToSection("elipse")}
-                                            />
+                                            <Suspense fallback={null}>
+                                                <SpinningModel
+                                                    url="/models/circularTable/circularTable_compressed.glb"
+                                                    onClickEvent={() => scrollToSection("elipse")}
+                                                />
+                                            </Suspense>
                                             <ClickableSectionText
                                                 section="Elipse"
                                                 scrollToSection={() => scrollToSection("elipse")}
                                             />
                                         </group>
                                         <group position={[0, -0.5, -4]}>
-                                            <SpinningModel
-                                                url="/models/glassTable/25_10_18_12_13_45_839.gltf"
-                                                onClickEvent={() => scrollToSection("aurora")}
-                                            />
+                                            <Suspense fallback={null}>
+                                                <SpinningModel
+                                                    url="/models/glassTable/glassTable_compressed.glb"
+                                                    onClickEvent={() => scrollToSection("aurora")}
+                                                />{" "}
+                                            </Suspense>
                                             <ClickableSectionText
                                                 section="Aurora Foods"
                                                 scrollToSection={() => scrollToSection("aurora")}
                                             />
                                         </group>
                                         <group position={[4, -0.5, -4]}>
-                                            <SpinningModel
-                                                url="/models/mushroomTable/25_10_18_11_55_04_284.gltf"
-                                                onClickEvent={() => scrollToSection("ventures")}
-                                            />
+                                            <Suspense fallback={null}>
+                                                <SpinningModel
+                                                    url="/models/mushroomTable/mushroomTable_compressed.glb"
+                                                    onClickEvent={() => scrollToSection("ventures")}
+                                                />{" "}
+                                            </Suspense>
                                             <ClickableSectionText
                                                 section="Ventures"
                                                 scrollToSection={() => scrollToSection("ventures")}
                                             />
                                         </group>
                                         <group position={[-4, -2.6, -4]}>
-                                            <SpinningModel
-                                                url="/models/shortTable/25_10_17_21_43_36_878.gltf"
-                                                onClickEvent={() => scrollToSection("swyftx")}
-                                            />
+                                            {" "}
+                                            <Suspense fallback={null}>
+                                                <SpinningModel
+                                                    url="/models/shortTable/shortTable_compressed.glb"
+                                                    onClickEvent={() => scrollToSection("swyftx")}
+                                                />{" "}
+                                            </Suspense>
                                             <ClickableSectionText
                                                 section="Swyftx"
                                                 scrollToSection={() => scrollToSection("swyftx")}
                                             />
                                         </group>
                                         <group position={[0, -2.6, -4]}>
-                                            <SpinningModel
-                                                url="/models/ovalTable/25_10_18_12_12_27_042.gltf"
-                                                onClickEvent={() => scrollToSection("lit")}
-                                            />
+                                            {" "}
+                                            <Suspense fallback={null}>
+                                                <SpinningModel
+                                                    url="/models/ovalTable/ovalTable_compressed.glb"
+                                                    onClickEvent={() => scrollToSection("lit")}
+                                                />{" "}
+                                            </Suspense>
                                             <ClickableSectionText
                                                 section="Ladies in Technology"
                                                 scrollToSection={() => scrollToSection("lit")}
@@ -139,19 +159,21 @@ export default function Works() {
                                     </>
                                 )}
                                 <group position={isScreenMobile ? [0, -1.2, 0] : [4, -2.6, -4]}>
-                                    <SpinningModel
-                                        url="/models/sideTable/25_10_18_12_37_30_381.gltf"
-                                        onClickEvent={() =>
-                                            window.open(
-                                                "https://drive.google.com/file/d/1MoWN4sct9eAQJP4bAz7rSbK8yFlGl20Z/view?usp=sharing",
-                                                "_blank"
-                                            )
-                                        }
-                                        customScale={isScreenMobile ? 0.025 : 0.009}
-                                        isLoading={() => {
-                                            setPageLoading(false);
-                                        }}
-                                    />
+                                    <Suspense fallback={null}>
+                                        <SpinningModel
+                                            url="/models/sideTable/sideTable_compressed.glb"
+                                            onClickEvent={() =>
+                                                window.open(
+                                                    "https://drive.google.com/file/d/1MoWN4sct9eAQJP4bAz7rSbK8yFlGl20Z/view?usp=sharing",
+                                                    "_blank"
+                                                )
+                                            }
+                                            customScale={isScreenMobile ? 0.025 : 0.009}
+                                            isLoading={() => {
+                                                setPageLoading(false);
+                                            }}
+                                        />{" "}
+                                    </Suspense>
                                     <Text
                                         fontSize={0.3}
                                         color="#572b1c"
@@ -233,6 +255,7 @@ export default function Works() {
                         >
                             <div className="relative w-full flex justify-center items-center py-8" id="zeroflucs">
                                 <iframe
+                                    loading="lazy"
                                     width="800"
                                     height="450"
                                     src="https://embed.figma.com/proto/pobzBQL70I1q32giB84zU6/Dashboard-Mockup?node-id=252-7121&p=f&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A2&show-proto-sidebar=1&embed-host=share"
@@ -296,6 +319,7 @@ export default function Works() {
                         >
                             <div className="relative w-full flex justify-center items-center py-8" id="aurora">
                                 <iframe
+                                    loading="lazy"
                                     width="800"
                                     height="450"
                                     src="https://embed.figma.com/proto/7uP7biZwk0poxVuhJENsb6/AuroraFoods?node-id=1-3&p=f&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3&embed-host=share"
@@ -330,6 +354,7 @@ export default function Works() {
                         >
                             <div className="relative w-full flex justify-center items-center py-8" id="swyftx">
                                 <iframe
+                                    loading="lazy"
                                     width="800"
                                     height="450"
                                     src="https://embed.figma.com/proto/HbrE98nfodTDlXyvL5ZBmh/DreamX?node-id=92-455&p=f&scaling=min-zoom&content-scaling=fixed&page-id=45%3A2&starting-point-node-id=92%3A455&embed-host=share"

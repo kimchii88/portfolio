@@ -12,7 +12,7 @@ import useIsMobile from "@/helpers/useIsMobile";
 export default function About() {
     const isScreenMobile = useIsMobile();
     return (
-        <div className="bg-[#F5A651] overflow-x-hidden">
+        <div className="bg-[#F5A651] overflow-x-hidden md:pb-0 pb-24">
             <main className="w-screen h-screen pt-10 pb-20 ">
                 <ScreenFadeIn isActive />
                 <Navbar />
@@ -48,13 +48,13 @@ export default function About() {
                             bounce: 0.25,
                         }}
                     >
-                        <div className="w-full h-full flex justify-start ">
-                            <div className="absolute md:flex top-[35%] left-[10%] hidden">
+                        <div className="w-full h-full flex justify-start">
+                            <div className="absolute md:flex top-[35%] left-[10%] hidden ">
                                 <BobbleItemWrapper>
                                     <Image src={"/images/picnic/donut.png"} alt={"donut"} width={200} height={200} />
                                 </BobbleItemWrapper>
                             </div>
-                            <div className="absolute md:bottom-[12%] md:left-[10%] left-[2.5%] bottom-5">
+                            <div className="absolute md:bottom-[12%] md:left-[10%] left-[2.5%] bottom-5  pb-24 md:pb-0">
                                 <BobbleItemWrapper>
                                     <Filmstrip />
                                 </BobbleItemWrapper>
