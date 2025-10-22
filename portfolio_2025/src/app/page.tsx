@@ -71,6 +71,7 @@ export default function Home() {
                                             <HeartIcon
                                                 url="/models/aboutMeHeart/aboutMeHeart_compressed.glb"
                                                 triggerFallTransition={() => handleTriggerFall("about")}
+                                                isMobile={isScreenMobile}
                                             />
                                         </Suspense>
                                     </group>
@@ -79,6 +80,7 @@ export default function Home() {
                                             <HeartIcon
                                                 url="/models/workHeart/workHeart_compressed.glb"
                                                 triggerFallTransition={() => handleTriggerFall("works")}
+                                                isMobile={isScreenMobile}
                                             />
                                         </Suspense>
                                     </group>
@@ -87,6 +89,7 @@ export default function Home() {
                                             <HeartIcon
                                                 url="/models/contactHeart/contactHeart_compressed.glb"
                                                 triggerFallTransition={() => handleTriggerFall("connect")}
+                                                isMobile={isScreenMobile}
                                             />
                                         </Suspense>
                                     </group>
