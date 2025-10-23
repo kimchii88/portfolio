@@ -15,7 +15,7 @@ export interface ImageObject {
 
 export default function LeftLinedSection({ children, image }: Section) {
     return (
-        <div id="content-section-left-lined" className="flex flex-row min-h-[400px] bg-[#f5a651]">
+        <div id="content-section-left-lined" className="flex flex-row min-h-[400px] bg-sunshine">
             <div id="images" className="bg-red-500 min-w-[350px] flex justify-center p-32 px-32">
                 {image && (
                     <Image

@@ -4,6 +4,8 @@ export const useWithSound = (audioSource: string) => {
     const soundRef = useRef<HTMLAudioElement>(null);
 
     useEffect(() => {
+        if (typeof window === "undefined") return;
+
         soundRef.current = new Audio(audioSource);
     }, [audioSource]);
 

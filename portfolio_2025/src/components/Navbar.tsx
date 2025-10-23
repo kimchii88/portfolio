@@ -6,12 +6,12 @@ export default function Navbar() {
 
     const underlineActivePathClass = (path: string) => {
         return currentPath.replace("/", "") === path
-            ? "border-b-2 border-[#572b1c]"
-            : "hover:cursor-pointer border-b-2 border-transparent hover:border-[#572b1c] transition duration-300";
+            ? "border-b-2 border-brown"
+            : "hover:cursor-pointer border-b-2 border-transparent hover:border-brown transition duration-300";
     };
 
     return (
-        <ul className="absolute z-10 top-5 left-1/2 transform -translate-x-1/2 flex flex-row bg-[#faf1d9] border-3 border-[#572b1c] rounded-4xl w-fit px-5 py-2 gap-10 font-roboto text-[#572b1c] font-bold ">
+        <ul className="fixed z-24 top-5 left-1/2 transform -translate-x-1/2 flex flex-row bg-eggYellow border-3 border-brown rounded-4xl w-fit px-5 py-2 gap-10 font-roboto text-brown font-bold ">
             <Link href={"/"} className={underlineActivePathClass("")}>
                 Home
             </Link>

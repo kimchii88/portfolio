@@ -5,6 +5,8 @@ export default function useIsMobile() {
 
     const [isScreenMobile, setIsScreenMobile] = useState(false);
     useEffect(() => {
+        if (typeof window === "undefined") return;
+
         const handleChange = () => {
             setIsScreenMobile(window.innerWidth <= mobileScreenSize);
         };

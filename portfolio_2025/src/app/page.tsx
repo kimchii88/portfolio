@@ -24,7 +24,7 @@ export default function Home() {
     };
 
     return (
-        <div className="min-h-screen w-full h-full bg-[#f1dfb6]">
+        <div className="min-h-screen w-full h-full bg-eggYellow">
             {pageLoading && <LoadingScreen />}
             <main className="w-screen h-screen md:pt-20 pb-20">
                 {!pageLoading && (
@@ -36,7 +36,7 @@ export default function Home() {
                             stiffness: 300,
                             damping: 20,
                         }}
-                        className="absolute md:top-2/12 md:left-32 z-1 left-10 top-7/12 text-[#e64027] md:text-9xl text-xl font-coiny flex flex-col"
+                        className="absolute md:top-2/12 md:left-32 z-1 left-10 top-7/12 text-tomato md:text-9xl text-xl font-coiny flex flex-col"
                     >
                         <section>
                             <h1 className="md:text-[250px] text-9xl">Hi!</h1>
@@ -101,7 +101,7 @@ export default function Home() {
                     <Canvas style={{ background: "#f1dfb6" }}>
                         <FallingTransitionWrapper trigger={fallingTransition} route={targetRoute}>
                             <Lighting isMobile />
-                            <group position={[-0.8, 2, 0]}>
+                            <group position={[1.2, 2, 0]}>
                                 <Suspense fallback={null}>
                                     <HeartIcon
                                         url="/models/aboutMeHeart/aboutMeHeart_compressed.glb"
@@ -113,7 +113,7 @@ export default function Home() {
                                     />
                                 </Suspense>
                             </group>
-                            <group position={[-0.8, 0.5, 0]}>
+                            <group position={[1.2, 0.5, 0]}>
                                 <Suspense fallback={null}>
                                     <HeartIcon
                                         url="/models/workHeart/workHeart_compressed.glb"
@@ -122,7 +122,7 @@ export default function Home() {
                                     />
                                 </Suspense>
                             </group>
-                            <group position={[-0.8, -1, 0]}>
+                            <group position={[1.2, -1, 0]}>
                                 <Suspense fallback={null}>
                                     <HeartIcon
                                         url="/models/contactHeart/contactHeart_compressed.glb"

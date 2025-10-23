@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import ScreenFadeOut from "@/components/SceneFadeOut";
 import { motion } from "framer-motion";
 import LeftLinedSection from "@/components/layouts/LeftLinedSection";
@@ -17,6 +17,7 @@ import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/Carouse
 import Lighting from "@/components/ui/Lighting";
 
 export default function Works() {
+    const [hasMounted, setHasMounted] = useState(false);
     const [pageLoading, setPageLoading] = useState(true);
     const [fallingTransition] = useState(false);
     const isScreenMobile = useIsMobile();
@@ -31,6 +32,11 @@ export default function Works() {
         });
     }, []);
 
+    useEffect(() => {
+        setHasMounted(true);
+    }, []);
+    if (!hasMounted) return null;
+
     const scrollToSection = (sectionSelected: string) => {
         const el = document.getElementById(sectionSelected);
         if (el) {
@@ -41,35 +47,53 @@ export default function Works() {
     return (
         <div>
             {pageLoading && <LoadingScreen />}
-            <main className="w-screen h-screen pt-20 md:pb-20 bg-[#faf1d9] overflow-x-hidden pb-40">
+            <main className="w-screen h-screen pt-20 md:pb-20 bg-eggYellow overflow-x-hidden pb-40">
                 {fallingTransition && <ScreenFadeOut isActive />}
                 <Navbar />
                 <div id="title-cards" className="flex md:flex-row gap-5 md:px-10 px-6 flex-col">
-                    <div className="bg-[#f5a651] h-[500px] md:w-1/2 rounded-2xl flex justify-center items-center object-center flex-col">
-                        <h1 className="text-[#d14538] md:text-9xl text-8xl font-coiny text-center">WORK</h1>
-                        <p className="text-[#572c1c]">Some cool things I did in the past</p>
+                    <div className="bg-sunshine h-[500px] md:w-1/2 rounded-2xl flex justify-center items-center object-center flex-col">
+                        <h1 className="text-rust md:text-9xl text-8xl font-coiny text-center">WORK</h1>
+                        <p className="text-brown">Some cool things I did in the past</p>
                     </div>
-                    <div className="bg-[#d14538] md:h-[500px] h-[300px] md:w-1/2 rounded-2xl flex items-center flex-col px-10">
-                        <h1 className="text-lg pt-5 md:pl-5 pb-1 self-start text-[#faf1d9] font-roboto">
+                    <div className="bg-rust md:h-[500px] h-[300px] md:w-1/2 rounded-2xl flex items-center flex-col px-10">
+                        <h1 className="text-lg pt-5 md:pl-5 pb-1 self-start text-eggYellow font-roboto">
                             {`${isScreenMobile ? "A Table of Content" : " Table of Contents"}`}
                         </h1>
-                        <div className="bg-[#faf1d9] h-full w-full rounded-2xl mb-10 overflow-scroll">
+                        <div className="bg-eggYellow h-full w-full rounded-2xl mb-10 overflow-scroll">
                             <Canvas camera={{ position: [0, 0, 8], fov: 35 }}>
                                 <Lighting />
+                                <group position={isScreenMobile ? [0, -0.5, 0] : [-4, 2, -4]}>
+                                    <Suspense fallback={null}>
+                                        <SpinningModel
+                                            url="/models/shortTable/shortTable_compressed.glb"
+                                            onClickEvent={() =>
+                                                window.open(
+                                                    "https://drive.google.com/file/d/1MoWN4sct9eAQJP4bAz7rSbK8yFlGl20Z/view?usp=sharing",
+                                                    "_blank"
+                                                )
+                                            }
+                                            customScale={isScreenMobile ? 0.025 : 0.009}
+                                            isLoading={() => {
+                                                setPageLoading(false);
+                                            }}
+                                        />
+                                    </Suspense>
+                                    <Text
+                                        fontSize={0.3}
+                                        color="#572b1c"
+                                        position={[0, -1, 0]}
+                                        onClick={() => {
+                                            window.open(
+                                                "https://drive.google.com/file/d/1MoWN4sct9eAQJP4bAz7rSbK8yFlGl20Z/view?usp=sharing",
+                                                "_blank"
+                                            );
+                                        }}
+                                    >
+                                        Resume
+                                    </Text>
+                                </group>
                                 {!isScreenMobile && (
                                     <>
-                                        <group position={[-4, 2, -4]}>
-                                            <Suspense fallback={null}>
-                                                <SpinningModel
-                                                    url="/models/longTable/longTable_compressed.glb"
-                                                    onClickEvent={() => scrollToSection("technologyone")}
-                                                />
-                                            </Suspense>
-                                            <ClickableSectionText
-                                                section="TechnologyOne"
-                                                scrollToSection={() => scrollToSection("technologyone")}
-                                            />
-                                        </group>
                                         <group position={[0, 2, -4]}>
                                             <Suspense fallback={null}>
                                                 <SpinningModel
@@ -131,10 +155,9 @@ export default function Works() {
                                             />
                                         </group>
                                         <group position={[-4, -2.6, -4]}>
-                                            {" "}
                                             <Suspense fallback={null}>
                                                 <SpinningModel
-                                                    url="/models/shortTable/shortTable_compressed.glb"
+                                                    url="/models/sideTable/sideTable_compressed.glb"
                                                     onClickEvent={() => scrollToSection("swyftx")}
                                                 />{" "}
                                             </Suspense>
@@ -144,7 +167,6 @@ export default function Works() {
                                             />
                                         </group>
                                         <group position={[0, -2.6, -4]}>
-                                            {" "}
                                             <Suspense fallback={null}>
                                                 <SpinningModel
                                                     url="/models/ovalTable/ovalTable_compressed.glb"
@@ -156,43 +178,25 @@ export default function Works() {
                                                 scrollToSection={() => scrollToSection("lit")}
                                             />
                                         </group>
+                                        <group position={[4, -2.6, -4]}>
+                                            <Suspense fallback={null}>
+                                                <SpinningModel
+                                                    url="/models/longTable/longTable_compressed.glb"
+                                                    onClickEvent={() => scrollToSection("technologyone")}
+                                                />
+                                            </Suspense>
+                                            <ClickableSectionText
+                                                section="TechnologyOne"
+                                                scrollToSection={() => scrollToSection("technologyone")}
+                                            />
+                                        </group>
                                     </>
                                 )}
-                                <group position={isScreenMobile ? [0, -1.2, 0] : [4, -2.6, -4]}>
-                                    <Suspense fallback={null}>
-                                        <SpinningModel
-                                            url="/models/sideTable/sideTable_compressed.glb"
-                                            onClickEvent={() =>
-                                                window.open(
-                                                    "https://drive.google.com/file/d/1MoWN4sct9eAQJP4bAz7rSbK8yFlGl20Z/view?usp=sharing",
-                                                    "_blank"
-                                                )
-                                            }
-                                            customScale={isScreenMobile ? 0.025 : 0.009}
-                                            isLoading={() => {
-                                                setPageLoading(false);
-                                            }}
-                                        />{" "}
-                                    </Suspense>
-                                    <Text
-                                        fontSize={0.3}
-                                        color="#572b1c"
-                                        position={[0, -0.5, 0]}
-                                        onClick={() => {
-                                            window.open(
-                                                "https://drive.google.com/file/d/1MoWN4sct9eAQJP4bAz7rSbK8yFlGl20Z/view?usp=sharing",
-                                                "_blank"
-                                            );
-                                        }}
-                                    >
-                                        Resume
-                                    </Text>
-                                </group>
                             </Canvas>
                         </div>
                     </div>
                 </div>
-                <div className=" my-8 whitespace-nowrap overflow-hidden bg-[#d14538] text-[#faf1d9] py-1">
+                <div className=" my-8 whitespace-nowrap overflow-hidden bg-rust text-eggYellow py-1">
                     <motion.div
                         animate={{ x: ["100%", "-100%"] }}
                         transition={{
