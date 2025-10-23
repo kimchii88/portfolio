@@ -15,6 +15,7 @@ import LoadingScreen from "@/components/LoadingScreen";
 import useIsMobile from "@/helpers/useIsMobile";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/Carousel";
 import Lighting from "@/components/ui/Lighting";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export default function Works() {
     const [hasMounted, setHasMounted] = useState(false);
@@ -47,9 +48,13 @@ export default function Works() {
     return (
         <div>
             {pageLoading && <LoadingScreen />}
-            <main className="w-screen h-screen pt-20 md:pb-20 bg-eggYellow overflow-x-hidden pb-40">
+            <main
+                data-scroll-container
+                className="w-screen h-screen pt-20 md:pb-20 bg-eggYellow overflow-x-hidden pb-40"
+            >
                 {fallingTransition && <ScreenFadeOut isActive />}
                 <Navbar />
+                <ScrollToTop />
                 <div id="title-cards" className="flex md:flex-row gap-5 md:px-10 px-6 flex-col">
                     <div className="bg-sunshine h-[500px] md:w-1/2 rounded-2xl flex justify-center items-center object-center flex-col">
                         <h1 className="text-rust md:text-9xl text-8xl font-coiny text-center">WORK</h1>
