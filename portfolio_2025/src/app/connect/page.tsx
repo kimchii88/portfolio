@@ -56,8 +56,8 @@ export default function Connect() {
 
                     <div
                         className={`${
-                            pageLoading ? "min-h-0 h-0" : "min-h-[100dvh] md:min-h-[35dvh] "
-                        }  overflow-hidden md:absolute inset-0 grid grid-cols-1 gap-10 md:grid-cols-3 md:grid-rows-2 md:gap-[4vw] place-items-center md:h-5/12 self-center md:w-9/12 md:left-36 md:top-5`}
+                            pageLoading ? "min-h-0 h-0" : "min-h-[100dvh] md:min-h-[40dvh] "
+                        }  overflow-hidden md:absolute inset-0 grid grid-cols-1 gap-10 md:grid-cols-3 md:grid-rows-2 md:gap-[1vw] place-items-center md:h-10/12 self-center md:w-10/12 md:left-36 md:top-5`}
                     >
                         <FileIcon
                             groupScale={2.5}
