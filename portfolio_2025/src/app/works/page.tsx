@@ -54,7 +54,9 @@ export default function Works() {
             >
                 {fallingTransition && <ScreenFadeOut isActive />}
                 <Navbar />
-                <ScrollToTop />
+                <div className="md:block hidden">
+                    <ScrollToTop />
+                </div>
                 <div id="title-cards" className="flex md:flex-row gap-5 md:px-10 px-6 flex-col">
                     <div className="bg-sunshine h-[500px] md:w-1/2 rounded-2xl flex justify-center items-center object-center flex-col">
                         <h1 className="text-rust md:text-9xl text-8xl font-coiny text-center">WORK</h1>
