@@ -73,7 +73,7 @@ export default function About() {
                                         />
                                     </BobbleItemWrapper>
                                 </div>
-                                <div className="hidden md:flex md:absolute md:bottom-[12%] md:left-[10%] left-3 -bottom-24">
+                                <div className="hidden md:flex md:absolute md:bottom-[8%] md:left-[10%] left-3 -bottom-24">
                                     <BobbleItemWrapper>
                                         <Filmstrip
                                             isLoading={() => {
@@ -84,7 +84,7 @@ export default function About() {
                                 </div>
                             </div>
                             <div className=" md:flex justify-end pr-34 hidden">
-                                <div className="absolute bottom-[35%] right-[15%]">
+                                <div className="absolute bottom-[25%] right-[15%]">
                                     <BobbleItemWrapper>
                                         <Image
                                             src={"/images/picnic/coffee.png"}
@@ -112,7 +112,7 @@ export default function About() {
                                         </Link>
                                     </BobbleItemWrapper>
                                 </div>
-                                <div className="absolute bottom-14 right-[15%]">
+                                <div className="absolute -bottom-10 right-[15%]">
                                     <BobbleItemWrapper>
                                         <Image
                                             className="rotate-45"
